@@ -3,3 +3,4 @@ vcpkg.json
 build/*
 vcpkg_installed/*
 *.json
+*.png
