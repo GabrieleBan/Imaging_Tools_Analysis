@@ -12,7 +12,7 @@ void linear_palette(int min,int max, std::vector<int> &palette, int slope=1){
     }
 }
 
-void sawtooth_palette(int min,int max, std::vector<int> &palette , std::vector<Interval_Slope> &intervals,Mode outer_bounds_mode ){
+void sawtooth_palette(int min,int max, std::vector<int> &palette , std::vector<Interval_Slope> &intervals,SawMode outer_bounds_mode ){
     int last_changed=0;
     
     
@@ -36,30 +36,31 @@ void sawtooth_palette(int min,int max, std::vector<int> &palette , std::vector<I
         {
             palette.at(i)=m*i-low;
         }
-        last_changed=i;
+        
 
         int fill_value;
         switch (outer_bounds_mode)
         {
-        case Mode::PALETTE_ADAPT_LEFT:
+        case SawMode::ADAPT_LEFT:
             fill_value=low;
             break;
-        case Mode::PALETTE_ADAPT_RIGH:
+        case SawMode::ADAPT_RIGHT:
             fill_value=up;
             break;
-        case Mode::PALETTE_MIN_OUTBOUNDS:
+        case SawMode::MIN_OUTBOUNDS:
             fill_value=min;
             break;
-        case Mode::PALETTE_IGNORE_OUTBOUNDS:
+        case SawMode::IGNORE_OUTBOUNDS:
             continue;
         default:
             continue;
         }
 
-        for(int i=low;i>last_changed;i--)
+        for(int j=low;j>last_changed;j--)
         {
-            palette.at(i)=fill_value;
+            palette.at(j)=fill_value;
         }
+        last_changed=i;
 
     }
     

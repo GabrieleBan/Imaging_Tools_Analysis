@@ -13,11 +13,13 @@ struct Interval_Slope{
     :                        u_B(_upperBound),l_B(_lowerBound),change_ratio(_slope){}
 };
 
-enum Mode:unsigned int{
-    PALETTE_ZERO_OUTBOUNDS,
-    PALETTE_MIN_OUTBOUNDS,
-    PALETTE_ADAPT_LEFT,
-    PALETTE_ADAPT_RIGH,
-    PALETTE_IGNORE_OUTBOUNDS
+enum SawMode:unsigned int{
+    ZERO_OUTBOUNDS,
+    MIN_OUTBOUNDS,
+    ADAPT_LEFT,
+    ADAPT_RIGHT,
+    IGNORE_OUTBOUNDS
 };
-void sawtooth_palette(int min,int max, std::vector<int> &palette , std::vector<Interval_Slope> &intervals,Mode outer_bounds_mode );
+void sawtooth_palette(int min,int max, std::vector<int> &palette , std::vector<Interval_Slope> &intervals,SawMode outer_bounds_mode );
+
+void cut_palette(int min , int max, std::vector<int> &palette,std::vector<Interval_Slope> &intervals);

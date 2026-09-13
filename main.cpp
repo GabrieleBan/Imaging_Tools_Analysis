@@ -35,10 +35,10 @@ int main()
         palette.reserve(256);
         linear_palette(100,255,palette,1);
         std::vector a=std::vector<Interval_Slope>();
-        a.push_back(Interval_Slope{0,90,1.15f});
-        a.push_back(Interval_Slope{170,255,0.5f});
+        a.push_back(Interval_Slope{0,170,1.15f});
+        a.push_back(Interval_Slope{200,255,0.5f});
 
-        sawtooth_palette(0,255,palette,a,Mode::PALETTE_ZERO_OUTBOUNDS);
+        sawtooth_palette(0,255,palette,a,SawMode::ADAPT_RIGHT);
         // inv_linear_palette(0,255,palette);
         // gamma_correction_palette(0,255,palette,3.0f,1.0f);
 
