@@ -33,9 +33,14 @@ int main()
         cv::imshow("Original Image",img);
         std::vector<int> palette=std::vector<int>();
         palette.reserve(256);
-        // linear_palette(0,255,palette);
+        linear_palette(100,255,palette,1);
+        std::vector a=std::vector<Interval_Slope>();
+        a.push_back(Interval_Slope{0,90,1.15f});
+        a.push_back(Interval_Slope{170,255,0.5f});
+
+        sawtooth_palette(0,255,palette,a,Mode::PALETTE_ZERO_OUTBOUNDS);
         // inv_linear_palette(0,255,palette);
-        gamma_correction_palette(0,255,palette,3.0f,1.0f);
+        // gamma_correction_palette(0,255,palette,3.0f,1.0f);
 
         cv::Mat newimg=apply_palette(img,palette);
 
