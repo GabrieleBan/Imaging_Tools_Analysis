@@ -21,5 +21,10 @@ enum SawMode:unsigned int{
     IGNORE_OUTBOUNDS
 };
 void sawtooth_palette(int min,int max, std::vector<int> &palette , std::vector<Interval_Slope> &intervals,SawMode outer_bounds_mode );
-
-void cut_palette(int min , int max, std::vector<int> &palette,std::vector<Interval_Slope> &intervals);
+enum FillMode:unsigned int{
+    FILL_ZERO,
+    FILL_VALUE,
+    FILL_BOUNDS_AVG,
+    FILL_ORIGINAL,
+};
+void cut_palette(int min, std::vector<int> &palette,std::vector<Interval_Slope> &intervals,FillMode mode,int value);

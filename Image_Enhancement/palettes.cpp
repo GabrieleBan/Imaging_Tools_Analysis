@@ -102,3 +102,62 @@ void gamma_correction_palette(int min,int max, std::vector<int> &palette,float g
     }
     
 }
+
+void cut_palette(int min, std::vector<int> &palette,std::vector<Interval_Slope> &intervals,FillMode mode,int value=0){
+    int i=0;
+    int up;
+    int down;
+    for(Interval_Slope range:intervals){
+        
+        if(range.u_B>range.l_B)
+        { 
+            up=range.u_B;
+            down=range.l_B;
+        }
+        else
+        {   
+            up=range.l_B;
+            down=range.u_B;
+        }
+        palette.reserve(up);
+
+        
+        while(i<down){
+            palette.at(i)=min;
+            i++;
+        }
+
+        switch (mode)
+        {
+        case FillMode::FILL_ORIGINAL:
+            i=up+1; //jump filling intervals
+            continue;
+        case FillMode::FILL_BOUNDS_AVG:
+            value=static_cast<int>((up-down)/2);
+            break;        
+        case FillMode::FILL_ZERO:
+            value=0;
+            break;
+        case FillMode::FILL_VALUE:
+            break;
+        default:
+            i=up+1; //jump filling intervals
+            continue;
+        }
+        
+        while(i<=up)
+        {
+            palette.at(i)=value;
+            i++;
+        }
+   
+
+    }
+    while(i<palette.size())
+    {
+        palette.at(i)=min;
+        i++;
+    }
+
+    
+}
